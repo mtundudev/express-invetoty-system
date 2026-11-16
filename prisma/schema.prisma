@@ -29,3 +29,15 @@ model User{
   updatedAt   DateTime @updatedAt
 
 }
+
+
+model Product{
+  id          Int    @id       @default(autoincrement())
+  name        String
+  sku         String @unique
+  description String?
+  costprice   Decimal @db.Decimal(10,2)
+  sellingprice Decimal @db.Decimal(10,2)
+  createdAt   DateTime@default(now())
+  updatedAt   DateTime@updatedAt
+}
