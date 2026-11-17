@@ -35,10 +35,13 @@ model Product {
   name         String
   sku          String   @unique
   description  String?
+  quantity     Int      @default(0)
   costprice    Decimal  @db.Decimal(10, 2)
   sellingprice Decimal  @db.Decimal(10, 2)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  stockMovemets StockMovement[]
 }
 
 model Categories {
@@ -46,4 +49,19 @@ model Categories {
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum MovementType {
+  IN
+  OUT
+}
+
+model StockMovement {
+  id        Int          @id @default(autoincrement())
+  productId Int
+  type      MovementType
+  quantity  Int
+  createdAt DateTime     @default(now())
+
+  product Product @relation(fields: [productId], references: [id])
 }
