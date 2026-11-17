@@ -4,7 +4,7 @@ import { protectedRouter } from "../../middleware/auth.middleware.js";
 
 
 
-export const router=express.Router()
+const router=express.Router()
 
 
 router.post("/create",create_user)
@@ -18,3 +18,5 @@ router.get("/user/:id",protectedRouter,userbyid)
 router.put("/user/:id",userupdate)
 
 router.delete("/user/:id",user_delete)
+
+export default router;
