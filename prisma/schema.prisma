@@ -13,31 +13,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UserRole{
+enum UserRole {
   ADMIN
   MANAGER
   STAFF
 }
-model User{
-  id          Int @id @default(autoincrement())
-  fullname    String
-  email       String @unique
-  password    String
-  role        UserRole @default(STAFF)
-  isActive    Boolean @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 
+model User {
+  id        Int      @id @default(autoincrement())
+  fullname  String
+  email     String   @unique
+  password  String
+  role      UserRole @default(STAFF)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
+model Product {
+  id           Int      @id @default(autoincrement())
+  name         String
+  sku          String   @unique
+  description  String?
+  costprice    Decimal  @db.Decimal(10, 2)
+  sellingprice Decimal  @db.Decimal(10, 2)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
 
-model Product{
-  id          Int    @id       @default(autoincrement())
-  name        String
-  sku         String @unique
-  description String?
-  costprice   Decimal @db.Decimal(10,2)
-  sellingprice Decimal @db.Decimal(10,2)
-  createdAt   DateTime@default(now())
-  updatedAt   DateTime@updatedAt
+model Categories {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
